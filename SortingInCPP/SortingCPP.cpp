@@ -11,6 +11,8 @@ void array_restore(int arr_backup[], int arr_to_restore[], int len);
 void sort_select(int arr[], int len, bool flag);
 void sort_bubble(int arr[], int len, bool flag);
 void sort_bubble_optimized(int arr[], int len, bool flag);
+void sort_merge(int arr[], int len, bool flag);
+
 
 int main()
 {
@@ -232,4 +234,9 @@ void sort_bubble_optimized(int arr[], int len, bool flag)
 	cout << "==================== Bubble Sort End =======================" << endl;
 }
 
+void sort_merge(int arr[], int len, bool flag)
+{
 
+
+
+}
