@@ -11,8 +11,7 @@ void array_restore(int arr_backup[], int arr_to_restore[], int len);
 void sort_select(int arr[], int len, bool flag);
 void sort_bubble(int arr[], int len, bool flag);
 void sort_bubble_optimized(int arr[], int len, bool flag);
-void sort_merge(int arr[], int len, bool flag);
-
+void sort_insert(int arr[], int len, bool flag);
 
 int main()
 {
@@ -25,7 +24,7 @@ int main()
 	size_t len = sizeof(array_to_sort) / sizeof(int);
 
 	cout << "Please select the sorting method: " << endl;
-	cout << "1. Select Sort.\n2. Bubble Sort.\n";
+	cout << "1. Select Sort.\n2. Bubble Sort.\n3. Insert Sort.\n";
 
 	size_t method;
 	
@@ -42,6 +41,8 @@ int main()
 			sort_bubble(array_to_sort, len, true);
 			//sort_bubble_optimized(array_to_sort, len, true);
 			break;
+		case 3:
+			sort_insert(array_to_sort, len, true);
 		default:
 			break;
 		}
@@ -52,6 +53,42 @@ int main()
 
 	_getch();
 	return 0;
+}
+
+void sort_insert(int arr[], int len, bool flag)
+{
+	cout << "==================== Insert Sort Begin =======================" << endl;
+
+	cout << "Before sorting: " << endl;
+	print_array(arr, len);
+	cout << endl;
+
+	for (size_t ii = 1; ii < len; ++ii)
+	{
+		int inserted = arr[ii];
+		cout << "Current number to insert: " << inserted << endl;
+
+		size_t jj = ii - 1;
+		
+		for (; jj >= 0 && arr[jj] > inserted; jj--)
+		{
+			arr[jj + 1] = arr[jj];
+
+			cout << "After move: ";
+			print_array(arr, len);
+		}
+
+		arr[jj + 1] = inserted;
+
+		cout << "After "<<ii<<"th " <<"sorting: ";
+		print_array(arr, len);
+		cout << endl;
+	}
+
+	cout << "After sorting: " << endl;
+	print_array(arr, len);
+	cout << endl;
+	cout << "==================== Insert Sort End =======================" << endl;
 }
 
 void swap_array(int ptr[], int index_i, int index_j)
@@ -234,9 +271,4 @@ void sort_bubble_optimized(int arr[], int len, bool flag)
 	cout << "==================== Bubble Sort End =======================" << endl;
 }
 
-void sort_merge(int arr[], int len, bool flag)
-{
 
-
-
-}
