@@ -12,6 +12,7 @@ void sort_select(int arr[], int len, bool flag);
 void sort_bubble(int arr[], int len, bool flag);
 void sort_bubble_optimized(int arr[], int len, bool flag);
 void sort_insert(int arr[], int len, bool flag);
+void sort_shell(int arr[], int len, bool flag);
 
 int main()
 {
@@ -24,7 +25,7 @@ int main()
 	size_t len = sizeof(array_to_sort) / sizeof(int);
 
 	cout << "Please select the sorting method: " << endl;
-	cout << "1. Select Sort.\n2. Bubble Sort.\n3. Insert Sort.\n";
+	cout << "1. Select Sort.\n2. Bubble Sort.\n3. Insert Sort.\n4. Shell Sort.\n";
 
 	size_t method;
 	
@@ -43,6 +44,8 @@ int main()
 			break;
 		case 3:
 			sort_insert(array_to_sort, len, true);
+		case 4:
+			sort_shell(array_to_sort, len, true);
 		default:
 			break;
 		}
@@ -53,6 +56,50 @@ int main()
 
 	_getch();
 	return 0;
+}
+
+void sort_shell(int arr[], int len, bool flag)
+{
+	cout << "==================== Insert Sort Begin =======================" << endl;
+
+	cout << "Before sorting: " << endl;
+	print_array(arr, len);
+	cout << endl;
+
+	for (int gap = len / 2; gap > 0; gap /= 2)
+	{
+		cout << "*************** Begin of "<< gap<<"th gap"<< " ***************"<<endl;
+
+		for (int ii = gap; ii < len; ii++)
+		{
+			cout << "Current group " << ii << ": " << endl;
+
+			int inserted = arr[ii];
+
+			int jj = ii - gap;
+
+			cout << "jj = " << jj << endl;
+
+			for (; jj >= 0 && inserted < arr[jj]; jj -= gap)
+			{
+				arr[jj + gap] = arr[jj];
+				cout << "After " << jj << "th move: ";
+				print_array(arr, len);
+			}
+			cout << "jj = " << jj << endl;
+			arr[jj + gap] = inserted;
+
+			cout << "After " << ii << "th insertion: ";
+			print_array(arr, len);
+			cout << endl;
+		}
+		cout << "*************** End of " << gap << "th gap" << "***************" << endl << endl;
+	}
+
+	cout << "After sorting: " << endl;
+	print_array(arr, len);
+	cout << endl;
+	cout << "==================== Insert Sort End =======================" << endl;
 }
 
 void sort_insert(int arr[], int len, bool flag)
